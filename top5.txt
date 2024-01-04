@@ -1,0 +1,20 @@
+***paste the excel sheet (sales ) into the data sheet for stata***
+
+sort skuname month year
+by skuname  month year: gen qty_monthly = sum( qty)
+sort qty_monthly month year
+egen code_firm = group( code)
+sort code_firm month year
+by  code_firm month year: gen qty_monthly1 = sum( qty)
+by code_firm month year: egen qty_monthly1_H = max(qty_monthly1)
+sort month year qty_monthly1_H
+save "C:\Users\ADMIN\Desktop\ashwin\top5.dta"
+export excel using "C:\Users\ADMIN\Desktop\ashwin\top5.xls"
+export excel using "C:\Users\ADMIN\Desktop\ashwin\top5.xls", firstrow(variables) replace
+export delimited using "C:\Users\ADMIN\Desktop\ashwin\top5.csv", replace
+duplicates drop code_firm  month year, force
+sort year month
+sort qty_monthly1_H month year
+sort qty_monthly1_H
+sort month year qty_monthly1_H
+export delimited using "C:\Users\ADMIN\Desktop\ashwin\top5_f.csv", replace
