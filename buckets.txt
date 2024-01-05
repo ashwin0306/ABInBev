@@ -1,0 +1,12 @@
+. gen buckets = 1 if positivenumbers <= 30
+(166,518 missing values generated)
+
+. replace buckets = 2 if positivenumbers > 30 & positivenumbers <= 60
+(5,145 real changes made)
+
+. replace buckets = 3 if positivenumbers > 60 & positivenumbers <= 90
+(17,283 real changes made)
+
+. replace buckets = 4  if positivenumbers > 90
+(144,090 real changes made)
+
